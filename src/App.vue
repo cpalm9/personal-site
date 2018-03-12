@@ -55,7 +55,7 @@
               class="mx-3 blue--text text--lighten-2"
               target="_blank"
             >
-            <v-icon size="24px">{{ icon.icon }}</v-icon>
+            <v-icon size="35px">{{ icon.icon }}</v-icon>
             </v-btn>
           </v-card-text>
           <v-card-actions>
