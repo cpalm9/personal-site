@@ -8,81 +8,61 @@
       <v-toolbar-title v-text="title"></v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
-        <v-btn flat @click="toAbout">About Me</v-btn>
-        <v-btn flat>Resume</v-btn>
-        <v-btn flat>GitHub</v-btn>
+        <v-btn flat @click="connectDialog = true">Connect</v-btn>
+        <v-btn flat href="https://github.com/cpalm9">GitHub</v-btn>
       </v-toolbar-items>
     </v-toolbar>
     <v-content>
       <router-view></router-view>
-      <section>
-        <v-container grid-list-xl>
-          <v-layout row wrap justify-center class="my-5">
-            <v-flex xs12 sm4>
-              <v-card class="elevation-0 transparent">
-                <v-card-title primary-title class="layout justify-center">
-                  <div class="headline">Follow Me</div>
-                </v-card-title>
-                <v-list class="transparent">
-                  <v-list-tile>
-                    <v-list-tile-action>
-                      <v-icon class="blue--text text--lighten-2">fab fa-facebook-square</v-icon>
-                    </v-list-tile-action>
-                    <v-list-tile-content>
-                      <v-list-tile-title>Facebook</v-list-tile-title>
-                    </v-list-tile-content>
-                  </v-list-tile>
-                  <v-list-tile>
-                    <v-list-tile-action>
-                      <v-icon class="blue--text text--lighten-2">fab fa-linkedin</v-icon>
-                    </v-list-tile-action>
-                    <v-list-tile-content>
-                      <v-list-tile-title>LinkedIn</v-list-tile-title>
-                    </v-list-tile-content>
-                  </v-list-tile>
-                </v-list>
-              </v-card>
-            </v-flex>
-            <v-flex xs12 sm4 offset-sm1>
-              <v-card class="elevation-0 transparent">
-                <v-card-title primary-title class="layout justify-center">
-                  <div class="headline">Want to learn more?</div>
-                </v-card-title>
-                <v-card-text>
-                  I love to meet new people and discuss the latest in web app technology or chat about recent adventures in the great outdoors!
-                </v-card-text>
-                <v-list class="transparent">
-                  <v-list-tile>
-                    <v-list-tile-action>
-                      <v-icon class="blue--text text--lighten-2">phone</v-icon>
-                    </v-list-tile-action>
-                    <v-list-tile-content>
-                      <v-list-tile-title>801-372-2699</v-list-tile-title>
-                    </v-list-tile-content>
-                  </v-list-tile>
-                  <v-list-tile>
-                    <v-list-tile-action>
-                      <v-icon class="blue--text text--lighten-2">place</v-icon>
-                    </v-list-tile-action>
-                    <v-list-tile-content>
-                      <v-list-tile-title>Orem, UT</v-list-tile-title>
-                    </v-list-tile-content>
-                  </v-list-tile>
-                  <v-list-tile>
-                    <v-list-tile-action>
-                      <v-icon class="blue--text text--lighten-2">email</v-icon>
-                    </v-list-tile-action>
-                    <v-list-tile-content>
-                      <v-list-tile-title>chrispalmer191@gmail.com</v-list-tile-title>
-                    </v-list-tile-content>
-                  </v-list-tile>
-                </v-list>
-              </v-card>
-            </v-flex>
-          </v-layout>
-        </v-container>
-      </section>
     </v-content>
+    <v-dialog v-model="connectDialog" max-width="500px">
+        <v-card>
+          <v-card-title>
+            Connect with Me!
+          </v-card-title>
+          <v-card-text>
+            <v-list class="transparent">
+              <v-list-tile>
+                <v-list-tile-action>
+                  <v-icon class="blue--text text--lighten-2">phone</v-icon>
+                </v-list-tile-action>
+                <v-list-tile-content>
+                  <v-list-tile-title>801-372-2699</v-list-tile-title>
+                </v-list-tile-content>
+              </v-list-tile>
+              <v-list-tile>
+                <v-list-tile-action>
+                  <v-icon class="blue--text text--lighten-2">place</v-icon>
+                </v-list-tile-action>
+                <v-list-tile-content>
+                  <v-list-tile-title>Orem, UT</v-list-tile-title>
+                </v-list-tile-content>
+              </v-list-tile>
+              <v-list-tile>
+                <v-list-tile-action>
+                  <v-icon class="blue--text text--lighten-2">email</v-icon>
+                </v-list-tile-action>
+                <v-list-tile-content>
+                  <v-list-tile-title>chrispalmer191@gmail.com</v-list-tile-title>
+                </v-list-tile-content>
+              </v-list-tile>
+            </v-list>
+            <v-btn
+              v-for="(icon,index) in icons"
+              :key="index"
+              icon
+              :href="icon.url"
+              class="mx-3 blue--text text--lighten-2"
+              target="_blank"
+            >
+            <v-icon size="24px">{{ icon.icon }}</v-icon>
+            </v-btn>
+          </v-card-text>
+          <v-card-actions>
+            <v-btn color="primary" flat @click.stop="connectDialog=false">Close</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
   </v-app>
  </div>
 </template>
@@ -92,7 +72,22 @@ export default {
   name: 'App',
   data () {
     return {
-      title: 'The Domain of Chris Palmer'
+      title: 'The Domain of Chris Palmer',
+      connectDialog: false,
+      icons: [
+        {
+          icon: 'fab fa-facebook-square',
+          url: 'https://www.facebook.com/chris.palmer3'
+        },
+        {
+          icon: 'fab fa-github',
+          url: 'https://github.com/cpalm9'
+        },
+        {
+          icon: 'fab fa-linkedin',
+          url: 'https://www.linkedin.com/in/christian-palmer-127267110'
+        }
+      ],
     }
   },
   methods: {
